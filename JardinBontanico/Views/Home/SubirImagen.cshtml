@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Jardín Botánico";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Incluir Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url('/path/to/tu-imagen-de-fondo.jpg'); /* Ruta de la imagen de fondo */
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido al Jardín Botánico</h1>
+    <p>Sube una imagen para identificar la flor.</p>
+
+    <!-- Formulario de carga de imagen con Bootstrap -->
+    <div class="form-container">
+        <form action="@Url.Action("SubirImagen", "Home")" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="flor-imagen" class="form-label">Selecciona una imagen</label>
+                <input type="file" class="form-control" id="flor-imagen" name="flor-imagen" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block">Comprobar Flor</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Incluir Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
