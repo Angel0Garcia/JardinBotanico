@@ -47,14 +47,14 @@
     </style>
 </head>
 <body>
-    <h1>Bienvenido al Jardín Botánico</h1>
-    <p>Sube una imagen para identificar la flor.</p>
+    
 
     <!-- Formulario de carga de imagen con Bootstrap -->
-    <div class="form-container">
-        <form action="@Url.Action("SubirImagen", "Home")" method="post" enctype="multipart/form-data">
+    <div class="form-container d-flex" style="background-color: rgba(255, 255, 255, 0.3);">
+        <form action="@Url.Action("SubirImagen", "Home")" method="post" enctype="multipart/form-data" >
+            <h1>Bienvenido al Jardín Botánico</h1>
+            <p>Sube una imagen para identificar la flor.</p>
             <div class="form-group">
-                <label for="flor-imagen" class="form-label">Selecciona una imagen</label>
                 <input type="file" class="form-control" id="flor-imagen" name="florImagen" accept="image/*" required>
             </div>
             <div class="form-group">

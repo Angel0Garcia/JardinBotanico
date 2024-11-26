@@ -15,7 +15,7 @@
 
         @if (ViewData["Resultado"] != null)
         {
-            <div class="alert alert-success">
+            <div class="alert alert-success d-block">
                 <h4>Resultado del análisis:</h4>
                 <pre>@ViewData["Resultado"]</pre>
             </div>
@@ -28,7 +28,7 @@
         }
 
         <br>
-        <a href="@Url.Action("SubirImagen", "Home")" class="btn btn-primary">Volver al inicio</a>
+        <a href="@Url.Action("SubirImagen", "Home")" class="btn btn-primary mt-lg-3">Volver al inicio</a>
     </div>
 </body>
 </html>
