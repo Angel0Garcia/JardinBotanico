@@ -46,57 +46,45 @@ namespace JardinBontanico.Controllers
                     Directory.CreateDirectory(uploadsFolder);
                 }
 
-                // Guardar la imagen en el servidor
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await florImagen.CopyToAsync(stream);
                 }
 
-                // Llamada a la API para analizar la imagen
                 var resultadoAnalisis = await AnalizarImagenConAPI(filePath);
 
-                // Pasamos el resultado a la vista de resultados
                 ViewData["Resultado"] = resultadoAnalisis;
                 ViewData["Imagen"] = florImagen.FileName;
 
-                return View("Resultado"); // Redirige a la vista Resultado
+                return View("Resultado"); 
             }
 
-            // Si no se ha subido una imagen, redirigimos al formulario nuevamente
             ViewData["Error"] = "No se ha subido una imagen válida.";
-            return View(); // Devuelve la vista SubirImagen con el mensaje de error
+            return View(); 
         }
 
-        // Método para llamar a la API y analizar la imagen
         private async Task<string> AnalizarImagenConAPI(string filePath)
         {
             using (var client = new HttpClient())
             {
-                // Configurar el encabezado de autenticación
                 client.DefaultRequestHeaders.Add("Prediction-Key", _apiKey);
 
-                // Abrir la imagen y convertirla en un archivo binario
                 var fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(filePath));
                 fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
-                // Enviar la solicitud POST a la API
                 var response = await client.PostAsync(_apiUrl, fileContent);
 
-                // Verificar si la respuesta es exitosa
                 if (response.IsSuccessStatusCode)
                 {
-                    // Leer la respuesta JSON
                     var jsonResponse = await response.Content.ReadAsStringAsync();
 
-                    // Opcional: Aquí puedes parsear el JSON para extraer los datos específicos que necesitas
                     dynamic result = JsonConvert.DeserializeObject(jsonResponse);
                     var predictions = result.predictions;
 
-                    // Mostrar las predicciones de la API
                     var resultado = new StringBuilder();
                     foreach (var prediction in predictions)
                     {
-                        resultado.AppendLine($"Etiqueta: {prediction.tagName}, Confianza: {prediction.probability}");
+                        resultado.AppendLine($"Tipo: {prediction.tagName}, Probabilidad: {prediction.probability}");
                     }
 
                     return resultado.ToString();
@@ -108,10 +96,9 @@ namespace JardinBontanico.Controllers
             }
         }
 
-        // Acción para mostrar los resultados del análisis
         public IActionResult Resultado()
         {
-            return View(); // Devuelve la vista Resultado con los datos en ViewData
+            return View(); 
         }
     }
 }
