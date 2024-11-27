@@ -16,15 +16,22 @@
         @if (ViewData["Resultado"] != null)
         {
             <div class="alert alert-success d-block">
-                <h4>Resultado del análisis:</h4>
+                <h4>Resultado principal:</h4>
                 <pre>@ViewData["Resultado"]</pre>
+
+                <!-- Mostrar los otros resultados opcionales si existen -->
+                @if (ViewData["OtrosResultados"] != null)
+                {
+                    <h5>Otros resultados:</h5>
+                    <pre>@ViewData["OtrosResultados"]</pre>
+                }
             </div>
         }
 
         @if (ViewData["Imagen"] != null)
         {
             <h3>Imagen cargada:</h3>
-            <img src="~/images/@ViewData["Imagen"]" alt="Flor Imagen" class="img-fluid" />
+            <img src="~/images/@ViewData["Imagen"]" alt="Flor Imagen" class="img-fluid" style="height: 25vh" />
         }
 
         <br>

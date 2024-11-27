@@ -84,7 +84,7 @@ namespace JardinBontanico.Controllers
                     var resultado = new StringBuilder();
                     foreach (var prediction in predictions)
                     {
-                        resultado.AppendLine($"Tipo: {prediction.tagName}, Probabilidad: {prediction.probability}");
+                        resultado.AppendLine($"Tipo: {prediction.tagName}, Probabilidad: {(int)prediction.probability*100}%");
                     }
 
                     return resultado.ToString();
